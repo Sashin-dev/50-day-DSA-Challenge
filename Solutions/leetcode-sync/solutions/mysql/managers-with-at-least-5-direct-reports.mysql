@@ -1,0 +1,11 @@
+# Write your MySQL query statement below
+
+# select name from Employee empA inner join (
+# select managerId from Employee group by managerId having count(managerId)>=5 ) empB on empA.id = empB.managerId
+
+select empA.name from Employee empA inner join Employee empB on
+empB.managerId = empA.id
+group by empb.managerId having count(empB.managerId)>=5
+
+# (
+# select managerId from Employee group by managerId having count(managerId)>=5 ) empB on empA.id = empB.managerId

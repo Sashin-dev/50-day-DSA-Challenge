@@ -1,0 +1,4 @@
+# Write your MySQL query statement below
+SELECT w2.id FROM Weather w1, weather w2
+where DATE_ADD(w1.recordDate, INTERVAL 1 DAY) = w2.recordDate
+and w1.temperature<w2.temperature

@@ -72,33 +72,29 @@
  */
 
 // @lc code=start
-
-import java.util.Arrays;
-//import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
-//import java.util.Map.Entry;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 class Solution {
-    public int totalFruit(int[] fruits) {
+        public int totalFruit(int[] fruits) {
+                int left = 0;
+                Map<Integer, Integer> basket = new HashMap<>();
+                int result = 0;
 
-        Map<Integer, Long> frequencyMap = Arrays.stream(fruits).boxed()
-                .collect(
-                        Collectors.groupingBy(Function.identity(),
-                                Collectors.counting()));
+                for (int i = 0; i < fruits.length; i++) {
+                        basket.merge(fruits[i], 1, Integer::sum);
 
-        Integer totalList = frequencyMap.entrySet()
-                .stream()
-                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
-                .map((k) -> k.getValue().toString())
-                .limit(2)
-                .mapToInt(Integer::valueOf)
-                .sum();
+                        while (basket.size() > 2) {
+                                basket.merge(fruits[left], -1, Integer::sum);
+                                if (basket.get(fruits[left]) == 0) {
+                                        basket.remove(fruits[left]);
+                                }
+                                left++;
+                        }
 
-        // System.out.println(frequencyMap);
-
-        return totalList;
-    }
+                        result = Math.max(result, i - left + 1);
+                }
+                return result;
+        }
 }
 // @lc code=end

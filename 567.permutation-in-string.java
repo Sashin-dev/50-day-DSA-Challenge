@@ -63,13 +63,15 @@ class Solution {
 
         for (int right = 0; right < s2.length(); right++) {
             Character input = s2.charAt(right);
-            if (s1FreqMap.getOrDefault(input, 0) > 0) {
+            if (s1FreqMap.containsKey(input)) {
                 s1FreqMap.merge(input, -1, Integer::sum);
             }
 
             if (right - left + 1 > s1.length()) {
                 Character out = s2.charAt(left++);
-                s1FreqMap.merge(out, 1, Integer::sum);
+                if (s1FreqMap.containsKey(out)) {
+                    s1FreqMap.merge(out, 1, Integer::sum);
+                }
             }
 
             if (right - left + 1 == s1.length()) {

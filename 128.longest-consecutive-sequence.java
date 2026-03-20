@@ -53,10 +53,26 @@
  */
 
 // @lc code=start
+
+import java.util.HashSet;
+import java.util.Set;
+
 class Solution {
     public int longestConsecutive(int[] nums) {
-        
+        if (nums.length == 0 || nums.length == 1)
+            return nums.length;
+
+        Set<Integer> hashset = new HashSet<>();
+        for (Integer n : nums) {
+            hashset.add(n);
+        }
+
+        int ans = 1;
+        int count = 1;
+
+        for (Integer i : nums) {
+
+        }
     }
 }
 // @lc code=end
-
